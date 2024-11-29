@@ -1,9 +1,9 @@
 steps:
   - name: 'europe-central2-docker.pkg.dev/mlops-01-443112/mlops-test'
-    args: ['builds', 'submit', '--tag', 'europe-central2-docker.pkg.dev/mlops-01-443112/mlops-test/hello-world']
+    args: ['builds', 'submit', '--tag', 'europe-central2-docker.pkg.dev/mlops-01-443112/mlops-test']
     id: 'build-and-push-docker-image'
 images:
-  - 'europe-central2-docker.pkg.dev/mlops-01-443112/mlops-tes/hello-world'
+  - 'europe-central2-docker.pkg.dev/mlops-01-443112/mlops-tes'
 timeout: '1200s'
 
 options:
