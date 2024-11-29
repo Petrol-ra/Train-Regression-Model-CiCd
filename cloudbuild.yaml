@@ -1,10 +1,29 @@
+substitutions:
+  _LOCATION: europe-central2
+  _PROGECT_ID: mlops-01-443112
+  _IMAGE_NAME: hello-world 
+  _REGISTRY: mlops-test
+  _VERSION: "1.0.1"  
+  _WORKDIR: .
 steps:
-  - name: 'europe-central2-docker.pkg.dev/mlops-01-443112/mlops-test'
-    args: ['builds', 'submit', '--tag', 'europe-central2-docker.pkg.dev/mlops-01-443112/mlops-test']
-    id: 'build-and-push-docker-image'
-images:
-  - 'europe-central2-docker.pkg.dev/mlops-01-443112/mlops-tes'
-timeout: '1200s'
+  - id: build container image
+    name: gcr.io/cloud-builders/docker
+    env:
+      - DOCKER _BUILDKIT=1
+    dir: $_WORKDIR
+    args:
+      - build
+      - -t
+      - $_LOCATION-docker.pkg.dev/$_PROJECT_ID/$_REGISTRY/$_IMAGE_NAME:$_VERSION
+      - -t
+      - $_LOCATION-docker.pkg.dev/$_PROJECT_ID/$_REGISTRY/$_IMAGE_NAME:latest
+      - -f
+      - Dockerfile
+      - .
 
+images:
+  - $_LOCATION-docker.pkg.dev/$_PROJECT_ID/$_REGISTRY/$_IMAGE_NAME
 options:
+  requestedVerifyOption: VERIFIED
   logging: CLOUD_LOGGING_ONLY
+  sourceProvenanceHash: ['SHA256']
