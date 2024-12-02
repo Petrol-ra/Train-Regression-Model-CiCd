@@ -1,7 +1,1 @@
-steps:
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['builds', 'submit', '--tag', 'gcr.io/$PROJECT_ID/hello-world']
-    id: 'build-and-push-docker-image'
-images:
-  - 'gcr.io/$PROJECT_ID/hello-world'
-timeout: '1200s'
+
